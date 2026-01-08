@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Real Estate AI Automation & Integration Hub
 
-## Getting Started
+A high-performance lead orchestration engine designed to bridge **Zapier**, **Make.com**, **GoHighLevel (GHL)**, and **Voice AI (Vapi)**. This project serves as a technical demonstration of the workflow automation and integration expertise mentioned on my CV.
 
-First, run the development server:
+**Live Demo:** [PASTE YOUR VERCEL LINK HERE]
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🏗️ Architecture Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This system acts as a middleware "Logic Engine" that processes incoming real estate leads and determines the optimal engagement path based on lead value and intent.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+### Integration Stack
+* **Trigger Layer:** Zapier (simulated) - Handles instant webhook ingestion from platforms like Zillow and Facebook Ads.
+* **Logic Layer:** Node.js/TypeScript - Executes custom data transformation, sanitization, and priority scoring.
+* **Orchestration Layer:** Make.com - Manages complex branching and multi-service handshakes.
+* **Action Layer:** Vapi & Retail AI - Dispatches outbound Voice AI agents for high-priority lead follow-up.
+* **Data Layer:** GoHighLevel (GHL) - Final CRM destination for contact sync, tagging, and nurture pipelines.
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Key Features (Reflected in Demo)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. Webhook Ingestion & Data Transformation
+- Implemented logic to sanitize messy "Real World" data (e.g., stripping non-numeric characters from phone numbers and converting to E.164 format).
+- **Why?** Ensures downstream APIs like Vapi and GHL never fail due to malformed payloads.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 2. Conditional Routing & Lead Scoring
+- Custom Node.js script calculates a "Priority Score" based on property budget and lead source.
+- High-intent leads are routed to **Voice AI** for immediate dispatch, while standard leads are routed to **GHL SMS** nurture flows.
 
-## Deploy on Vercel
+### 3. API-to-API Communication Patterns
+- Uses a "Payload Inspector" to allow for real-time auditing of JSON structures.
+- Designed with **RESTful API best practices** in mind, including structured error handling and simulation of exponential backoff for reliability.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠️ Technical Implementation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Custom Logic Snippet (Node.js/TypeScript)
+```typescript
+// Example of the logic used to "supercharge" low-code tools
+export function processLead(lead) {
+  const isHighPriority = parseInt(lead.budget.replace(/\D/g, '')) >= 750000;
+  return {
+    status: isHighPriority ? "HOT_LEAD" : "NURTURE",
+    next_step: isHighPriority ? "TRIGGER_VAPI" : "GHL_SMS_NURTURE"
+  };
+}
+📈 Business Impact
+Reduced Lead Response Time: By automating the Vapi trigger, the lead is contacted in <1 min.
+
+Operational Savings: Conditional routing prevents expensive AI credits from being spent on low-quality leads.
+
+Data Integrity: Centralized GHL tagging ensures the sales team has perfect visibility into the AI's actions.
+
+Developed by Mercy Chepng’eno Focused on Workflow Automation, Integration Engineering, and AI Scaling.
